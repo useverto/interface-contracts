@@ -9,11 +9,14 @@ export interface StateInterface {
 
   tokens: {
     [id: string]: {
-      type: "community" | "art" | "custom";
+      type: Token;
+      owner: string;
       // TODO: Interface for "custom" type.
     };
   };
 }
+
+export type Token = "community" | "art" | "custom";
 
 export interface ActionInterface {
   input: any;
@@ -21,3 +24,14 @@ export interface ActionInterface {
 }
 
 // TODO: Module Interfaces.
+
+export interface ListInterface {
+  function: "list";
+  id: string;
+  type: Token;
+}
+
+export interface UnlistInterface {
+  function: "unlist";
+  id: string;
+}
