@@ -25,6 +25,14 @@ export interface ActionInterface {
 
 // TODO: Module Interfaces.
 
+export interface ClaimInterface {
+  function: "claim";
+  username: string;
+  name: string;
+  addresses?: string[];
+  image: string;
+}
+
 export interface ListInterface {
   function: "list";
   id: string;
