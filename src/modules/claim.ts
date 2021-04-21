@@ -19,6 +19,9 @@ export const Claim = (state: StateInterface, action: ActionInterface) => {
     "Caller did not supply a valid image."
   );
 
+  const person = people.find((user) => user.username === username);
+  ContractAssert(!person, "Username has already been claimed.");
+
   people.push({
     username,
     name,
