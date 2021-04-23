@@ -10,7 +10,8 @@ export const Unlist = (state: StateInterface, action: ActionInterface) => {
   const input: UnlistInterface = action.input;
   const id = input.id;
 
-  ContractAssert(id in tokens, "Token has not been listed.");
+  const index = tokens.findIndex((token) => token.id === id);
+  ContractAssert(index > -1, "Token has not been listed.");
 
   const owner = people.find((user) =>
     user.addresses.find((address) => address === caller)
@@ -21,6 +22,6 @@ export const Unlist = (state: StateInterface, action: ActionInterface) => {
     "Caller is not the owner of the token."
   );
 
-  delete tokens[id];
+  tokens.splice(index);
   return { ...state, tokens };
 };

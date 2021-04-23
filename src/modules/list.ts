@@ -25,11 +25,13 @@ export const List = (state: StateInterface, action: ActionInterface) => {
   );
   ContractAssert(owner, "Caller does not have an identity.");
 
-  ContractAssert(!(id in tokens), "Token has already been listed.");
+  const token = tokens.find((item) => item.id === id);
+  ContractAssert(!token, "Token has already been listed.");
 
-  tokens[id] = {
+  tokens.push({
+    id,
     type,
     owner: owner.username,
-  };
+  });
   return { ...state, tokens };
 };

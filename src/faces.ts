@@ -8,12 +8,11 @@ export interface StateInterface {
   }[];
 
   tokens: {
-    [id: string]: {
-      type: Token;
-      owner: string;
-      // TODO: Interface for "custom" type.
-    };
-  };
+    id: string;
+    type: Token;
+    owner: string;
+    // TODO: Interface for "custom" type.
+  }[];
 }
 
 export type Token = "community" | "art" | "custom";
