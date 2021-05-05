@@ -1,4 +1,19 @@
 {
-  "people": [],
+  "people": [
+    {
+      "username": "@letey",
+      "name": "John Letey",
+      "addresses": [
+        "vxUdiv2fGHMiIoek5E4l3M5qSuKCZtSaOBYjMRc94JU",
+        "feXSjpWp0gTkr4201FzYwzTXnuxlUqtrhhw59YyP8I4"
+      ],
+      "image": "z0g2VJPg6Cx5bSmWmB-6DAbZ_QH3HYA3qwapIs59c1g",
+      "bio": "Co-Founder & CTO of KYVE. Consulting @ Verto.",
+      "links": {
+        "twitter": "johnletey",
+        "github": "johnletey"
+      }
+    }
+  ],
   "tokens": []
 }

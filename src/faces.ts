@@ -3,8 +3,11 @@ export interface StateInterface {
     username: string;
     name: string;
     addresses: string[];
-    image: string;
-    // TODO: Interface for social links.
+    image?: string;
+    bio?: string;
+    links?: {
+      [identifier: string]: string;
+    };
   }[];
 
   tokens: {
@@ -29,7 +32,11 @@ export interface ClaimInterface {
   username: string;
   name: string;
   addresses?: string[];
-  image: string;
+  image?: string;
+  bio?: string;
+  links?: {
+    [identifier: string]: string;
+  };
 }
 
 export interface ListInterface {

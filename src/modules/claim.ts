@@ -11,13 +11,11 @@ export const Claim = (state: StateInterface, action: ActionInterface) => {
   const name = input.name;
   const addresses = input.addresses || [];
   const image = input.image;
+  const bio = input.bio;
+  const links = input.links;
 
   ContractAssert(username, "Caller did not supply a valid username.");
   ContractAssert(name, "Caller did not supply a valid name.");
-  ContractAssert(
-    /[a-z0-9_-]{43}/i.test(image),
-    "Caller did not supply a valid image."
-  );
 
   const person = people.find((user) => user.username === username);
   ContractAssert(!person, "Username has already been claimed.");
@@ -27,6 +25,8 @@ export const Claim = (state: StateInterface, action: ActionInterface) => {
     name,
     addresses: [caller, ...addresses],
     image,
+    bio,
+    links,
   });
   return { ...state, people };
 };
