@@ -17,9 +17,7 @@
     {
       "username": "t8",
       "name": "Tate Berenbaum",
-      "addresses": [
-        "pvPWBZ8A5HLpGSEfhEmK1A3PfMgB_an8vVS6L14Hsls"
-      ],
+      "addresses": ["pvPWBZ8A5HLpGSEfhEmK1A3PfMgB_an8vVS6L14Hsls"],
       "bio": "CEO of Verto.",
       "links": {
         "twitter": "TateBerenbaum",
