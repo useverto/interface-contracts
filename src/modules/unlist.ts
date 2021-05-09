@@ -13,12 +13,12 @@ export const Unlist = (state: StateInterface, action: ActionInterface) => {
   const index = tokens.findIndex((token) => token.id === id);
   ContractAssert(index > -1, "Token has not been listed.");
 
-  const owner = people.find((user) =>
+  const identity = people.find((user) =>
     user.addresses.find((address) => address === caller)
   );
-  ContractAssert(owner, "Caller does not have an identity.");
+  ContractAssert(identity, "Caller does not have an identity.");
   ContractAssert(
-    tokens[id].owner === owner.username,
+    tokens[id].owner === identity.username,
     "Caller is not the owner of the token."
   );
 

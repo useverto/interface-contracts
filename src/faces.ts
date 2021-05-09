@@ -13,7 +13,7 @@ export interface StateInterface {
   tokens: {
     id: string;
     type: Token;
-    owner: string;
+    lister: string;
     // TODO: Interface for "custom" type.
   }[];
 }

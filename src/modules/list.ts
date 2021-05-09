@@ -20,10 +20,10 @@ export const List = (state: StateInterface, action: ActionInterface) => {
     "Caller did not supply a valid token type."
   );
 
-  const owner = people.find((user) =>
+  const identity = people.find((user) =>
     user.addresses.find((address) => address === caller)
   );
-  ContractAssert(owner, "Caller does not have an identity.");
+  ContractAssert(identity, "Caller does not have an identity.");
 
   const token = tokens.find((item) => item.id === id);
   ContractAssert(!token, "Token has already been listed.");
@@ -31,7 +31,7 @@ export const List = (state: StateInterface, action: ActionInterface) => {
   tokens.push({
     id,
     type,
-    owner: owner.username,
+    lister: identity.username,
   });
   return { ...state, tokens };
 };
