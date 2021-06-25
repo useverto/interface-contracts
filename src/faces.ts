@@ -10,15 +10,10 @@ export interface StateInterface {
     };
   }[];
 
-  tokens: {
-    id: string;
-    type: Token;
-    lister: string;
-    // TODO: Interface for "custom" type.
-  }[];
+  tokens: Array<TokenInterface | CollectionInterface>;
 }
 
-export type Token = "community" | "art" | "custom";
+export type TokenType = "community" | "art" | "custom";
 
 export interface ActionInterface {
   input: any;
@@ -42,10 +37,27 @@ export interface ClaimInterface {
 export interface ListInterface {
   function: "list";
   id: string;
-  type: Token;
+  type: TokenType | "collection";
 }
 
 export interface UnlistInterface {
   function: "unlist";
   id: string;
+}
+
+// Tokens & Collections
+
+interface TokenInterface {
+  id: string;
+  type: TokenType;
+  lister: string;
+}
+
+interface CollectionInterface {
+  id: string;
+  name: string;
+  description: string;
+  type: "collection";
+  items: string[];
+  lister: string;
 }
