@@ -10,10 +10,10 @@ export interface StateInterface {
     };
   }[];
 
-  tokens: Array<TokenInterface | CollectionInterface>;
+  tokens: TokenInterface[];
 }
 
-export type TokenType = "community" | "art" | "custom";
+export type TokenType = "community" | "art" | "collection" | "custom";
 
 export interface ActionInterface {
   input: any;
@@ -34,10 +34,10 @@ export interface ClaimInterface {
   };
 }
 
-export interface ListInterface {
+export interface ListInterface extends CollectionExtraData {
   function: "list";
   id: string;
-  type: TokenType | "collection";
+  type: TokenType;
 }
 
 export interface UnlistInterface {
@@ -47,17 +47,14 @@ export interface UnlistInterface {
 
 // Tokens & Collections
 
-interface TokenInterface {
+interface TokenInterface extends CollectionExtraData {
   id: string;
   type: TokenType;
   lister: string;
 }
 
-interface CollectionInterface {
-  id: string;
-  name: string;
-  description: string;
-  type: "collection";
-  items: string[];
-  lister: string;
+interface CollectionExtraData {
+  name?: string;
+  description?: string;
+  items?: string[]; // ids of tokens
 }

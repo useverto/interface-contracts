@@ -28,10 +28,47 @@ export const List = (state: StateInterface, action: ActionInterface) => {
   const token = tokens.find((item) => item.id === id);
   ContractAssert(!token, "Token has already been listed.");
 
-  tokens.push({
-    id,
-    type,
-    lister: identity.username,
-  });
+  if (type === "collection") {
+    const name = input.name;
+    const description = input.description;
+    const items = input.items;
+
+    ContractAssert(name, "No name submitted.");
+    ContractAssert(description, "No description submitted.");
+    ContractAssert(items, "No items submitted.");
+    ContractAssert(
+      items.length >= 3,
+      "A min. amount of 3 items are required to create a collection."
+    );
+
+    for (const item of items) {
+      const itemToAdd = tokens.find((el) => el.id === item);
+
+      ContractAssert(itemToAdd, `${itemToAdd.id} is not listed.`);
+      ContractAssert(
+        itemToAdd.lister === identity.username,
+        `${itemToAdd.id} is not listed by you.`
+      );
+      ContractAssert(
+        itemToAdd.type === "art",
+        `${itemToAdd.id} is not an art.`
+      );
+    }
+
+    tokens.push({
+      id,
+      type,
+      lister: identity.username,
+      name,
+      description,
+      items,
+    });
+  } else {
+    tokens.push({
+      id,
+      type,
+      lister: identity.username,
+    });
+  }
   return { ...state, tokens };
 };
