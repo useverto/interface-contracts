@@ -19,5 +19,26 @@ export const UpdateCollaborators = (
 
   ContractAssert(caller in collaborators, "Caller not in collaborators.");
 
-  // TODO: update collaborators
+  for (const addr of input.collaborators) {
+    ContractAssert(/[a-z0-9_-]{43}/i.test(addr), `Invalid address ${addr}`);
+  }
+
+  // loop through the current collaborators
+  // only allow removing a collaborator
+  // if the caller is the original creator /
+  // owner of the contract
+  for (const addr of collaborators)
+    if (!input.collaborators.includes(addr))
+      ContractAssert(
+        caller === creator,
+        "Caller cannot remove a collaborator."
+      );
+
+  // do not allow removing the creator
+  ContractAssert(
+    input.collaborators.includes(creator),
+    "Cannot remove creator from collaborators."
+  );
+
+  return { ...state, collaborators: input.collaborators };
 };
