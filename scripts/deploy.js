@@ -8,9 +8,13 @@ const client = new Arweave({
   protocol: "https",
 });
 
+const contract = process.env.CONTRACT_NAME;
+
+if (!contract) throw new Error("No contract name submitted");
+
 const wallet = JSON.parse(fs.readFileSync("./arweave.json"));
-const src = fs.readFileSync("./dist/index.js");
-const state = fs.readFileSync("./scripts/state.json");
+const src = fs.readFileSync(`./dist/${contract}/index.js`);
+const state = fs.readFileSync(`./src/${contract}/state.json`);
 
 (async () => {
   const id = await createContract(client, wallet, src, state);
