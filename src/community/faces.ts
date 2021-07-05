@@ -18,7 +18,7 @@ export interface StateInterface {
   }[];
 }
 
-export type Token = "community" | "art" | "custom";
+export type Token = "community" | "art" | "collection" | "custom";
 
 export interface ActionInterface {
   input: any;

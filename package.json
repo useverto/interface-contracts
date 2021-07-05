@@ -2,6 +2,7 @@
   "scripts": {
     "build-all": "node ./scripts/build.js",
     "deploy:community": "CONTRACT_NAME=community node ./scripts/deploy.js",
+    "deploy:invite": "CONTRACT_NAME=invite node ./scripts/deploy.js",
     "fmt": "prettier --write ."
   },
   "devDependencies": {
