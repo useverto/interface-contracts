@@ -20,6 +20,6 @@ export const UpdateDetails = (
   return {
     ...state,
     name: input.name ?? state.name,
-    description: input.description ?? state.description
-  }
+    description: input.description ?? state.description,
+  };
 };
