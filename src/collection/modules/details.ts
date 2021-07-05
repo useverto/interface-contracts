@@ -17,5 +17,9 @@ export const UpdateDetails = (
 
   ContractAssert(caller in collaborators, "Caller not in collaborators.");
 
-  // TODO: update details
+  return {
+    ...state,
+    name: input.name ?? state.name,
+    description: input.description ?? state.description
+  }
 };
