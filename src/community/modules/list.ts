@@ -16,7 +16,10 @@ export const List = (state: StateInterface, action: ActionInterface) => {
     "Caller did not supply a valid token ID."
   );
   ContractAssert(
-    type === "art" || type === "community" || type === "custom",
+    type === "art" ||
+      type === "community" ||
+      type === "collection" ||
+      type === "custom",
     "Caller did not supply a valid token type."
   );
 
