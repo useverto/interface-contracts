@@ -17,7 +17,10 @@ export const UpdateCollaborators = (
   const caller = action.caller;
   const creator: string = SmartWeave.contract.owner;
 
-  ContractAssert(caller in collaborators, "Caller not in collaborators.");
+  ContractAssert(
+    collaborators.includes(caller),
+    "Caller not in collaborators."
+  );
   ContractAssert(
     caller === creator,
     "Only the collection's owner can manage the collaborators."

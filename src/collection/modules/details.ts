@@ -15,7 +15,10 @@ export const UpdateDetails = (
   const input: UpdateDetailsInterface = action.input;
   const caller = action.caller;
 
-  ContractAssert(caller in collaborators, "Caller not in collaborators.");
+  ContractAssert(
+    collaborators.includes(caller),
+    "Caller not in collaborators."
+  );
 
   return {
     ...state,

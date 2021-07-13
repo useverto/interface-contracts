@@ -12,7 +12,10 @@ export const UpdateItems = (state: StateInterface, action: ActionInterface) => {
   const input: UpdateItemsInterface = action.input;
   const caller = action.caller;
 
-  ContractAssert(caller in collaborators, "Caller not in collaborators.");
+  ContractAssert(
+    collaborators.includes(caller),
+    "Caller not in collaborators."
+  );
 
   for (const itemID of input.items) {
     ContractAssert(
