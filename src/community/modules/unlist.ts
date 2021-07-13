@@ -18,7 +18,7 @@ export const Unlist = (state: StateInterface, action: ActionInterface) => {
   );
   ContractAssert(identity, "Caller does not have an identity.");
   ContractAssert(
-    tokens[id].owner === identity.username,
+    tokens[index].lister === identity.username,
     "Caller is not the owner of the token."
   );
 
