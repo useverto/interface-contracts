@@ -22,6 +22,6 @@ export const Unlist = (state: StateInterface, action: ActionInterface) => {
     "Caller is not the owner of the token."
   );
 
-  tokens.splice(index);
+  tokens.splice(index, 1);
   return { ...state, tokens };
 };
