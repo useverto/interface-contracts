@@ -2,9 +2,10 @@ import { ActionInterface, MintInterface, StateInterface } from "../faces";
 
 declare const ContractAssert: any;
 declare const ContractError: any;
+declare const SmartWeave: any;
 
 export const Mint = (state: StateInterface, action: ActionInterface) => {
-  const owner = state.owner;
+  const owner = SmartWeave.contract.owner;
   const balances = state.balances;
   const invites = state.invites;
   const caller = action.caller;
