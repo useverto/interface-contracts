@@ -11,7 +11,7 @@ export interface StateInterface {
           creator: string;
           token: string;
           price: number;
-        }
+        }?
       ];
     }
   ];
