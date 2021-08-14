@@ -15,6 +15,11 @@ export interface StateInterface {
       ];
     }
   ];
+  invocations: string[];
+  foreignCalls: {
+    contract: string;
+    input: object;
+  }[];
 }
 
 export interface ActionInterface {
@@ -41,4 +46,15 @@ export interface CancelOrderInterface {
 
 export interface HaltInterface {
   function: "halt";
+}
+
+export interface InvokeInterface {
+  function: "invoke";
+  foreignContract: string;
+  invocation: object;
+}
+
+export interface ReadOutboxInterface {
+  function: "readOutbox";
+  contract: string;
 }
