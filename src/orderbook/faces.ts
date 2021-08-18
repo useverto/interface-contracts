@@ -4,7 +4,7 @@ export interface StateInterface {
   protocolFeePercent: number; // Percent of orders going to protocol
   pairs: [
     {
-      pair: Array<string>[2];
+      pair: [string, string];
       orders: [
         {
           transaction: string;
@@ -29,13 +29,13 @@ export interface ActionInterface {
 
 export interface AddPairInterface {
   function: "addPair";
-  pair: Array<string>[2]; // Pair that the user wants to initialize
+  pair: [string, string]; // Pair that the user wants to initialize
 }
 
 export interface CreateOrderInterface {
   function: "createOrder";
   transaction: string; // Transaction hash from the token transfer to this contract
-  pair: Array<string>[2]; // Pair that user is trading between
+  pair: [string, string]; // Pair that user is trading between
   price?: number; // Price of token being sent (optional)
 }
 
