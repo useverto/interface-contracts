@@ -1,8 +1,16 @@
-import { ActionInterface, StateInterface, CreateOrderInterface } from "../faces";
+import {
+  ActionInterface,
+  StateInterface,
+  CreateOrderInterface,
+} from "../faces";
 
 declare const ContractAssert: any;
+declare const SmartWeave: any;
 
-export const createOrder = (state: StateInterface, action: ActionInterface) => {
+export const createOrder = async (
+  state: StateInterface,
+  action: ActionInterface
+) => {
   const caller = action.caller;
   const input: CreateOrderInterface = action.input;
 
@@ -10,7 +18,6 @@ export const createOrder = (state: StateInterface, action: ActionInterface) => {
   const usedPair = input.pair;
   const tokenTx = input.transaction;
   const price = input.price;
-
 
   // Test that pairs are valid contract strings
   ContractAssert(
@@ -27,20 +34,37 @@ export const createOrder = (state: StateInterface, action: ActionInterface) => {
     );
   }
 
-  // TODO: Test tokenTx for valid contract interaction
+  // Test tokenTx for valid contract interaction
+  const {
+    validity: contractTxValidities,
+  } = await SmartWeave.contracts.readContractState(
+    "TOKEN CONTRACT ID",
+    undefined,
+    true
+  ); // TODO
+
+  // The transfer tx of the token somewhy does not exist
+  ContractAssert(
+    tokenTx in contractTxValidities,
+    "Could not find transfer transaction"
+  );
+
+  // Invalid transfer
+  ContractAssert(
+    contractTxValidities[tokenTx],
+    "The transfer transaction is an invalid interaction"
+  );
 
   // Check for limit order or market order
   if (price) {
     // Limit order
-    
   } else {
     // Market order
-
   }
 
   state.pairs.push({
-      pair: usedPair,
-      orders: []
+    pair: usedPair,
+    orders: [],
   });
   return { ...state };
 };

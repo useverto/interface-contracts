@@ -4,7 +4,10 @@ declare const ContractAssert: any;
 declare const SmartWeave: any;
 declare const ContractError: any;
 
-export const AddPair = async (state: StateInterface, action: ActionInterface) => {
+export const AddPair = async (
+  state: StateInterface,
+  action: ActionInterface
+) => {
   const caller = action.caller;
   const input: AddPairInterface = action.input;
 
@@ -23,14 +26,19 @@ export const AddPair = async (state: StateInterface, action: ActionInterface) =>
       // Pull the latest contract state
       const tokenState = await SmartWeave.contracts.readContractState(id);
       // Ensure contract has ticker and balances
-      ContractAssert(tokenState?.ticker && tokenState?.balances, "Contract is not a valid token");
+      ContractAssert(
+        tokenState?.ticker && tokenState?.balances,
+        "Contract is not a valid token"
+      );
       // Ensure contract has a valid ticker
-      ContractAssert(typeof tokenState.ticker === "string", "Contract ticker is not a string");
+      ContractAssert(
+        typeof tokenState.ticker === "string",
+        "Contract ticker is not a string"
+      );
       // Check each address in the balances object
       for (const addr in tokenState.balances) {
         ContractAssert(typeof tokenState.balances[addr] === "number");
       }
-      
     } catch (e) {
       throw new ContractError(e);
     }
@@ -46,8 +54,8 @@ export const AddPair = async (state: StateInterface, action: ActionInterface) =>
   }
 
   state.pairs.push({
-      pair: newPair,
-      orders: []
+    pair: newPair,
+    orders: [],
   });
   return { ...state };
 };
