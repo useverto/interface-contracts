@@ -4,10 +4,7 @@ import {
   CreateOrderInterface,
 } from "../faces";
 
-declare const ContractAssert: any;
-declare const SmartWeave: any;
-
-export const createOrder = async (
+export const CreateOrder = async (
   state: StateInterface,
   action: ActionInterface
 ) => {
@@ -18,6 +15,7 @@ export const createOrder = async (
   const usedPair = input.pair;
   const tokenTx = input.transaction;
   const price = input.price;
+  let pairIndex;
 
   // Test that pairs are valid contract strings
   ContractAssert(
@@ -28,20 +26,53 @@ export const createOrder = async (
   // Test if pair already exists
   for (let i = 0; i < pairs.length; i++) {
     const currentPair = pairs[i].pair;
-    ContractAssert(
-      !currentPair.includes(usedPair[0]) && !currentPair.includes(usedPair[1]),
-      "This pair already exists"
-    );
+    if (
+      currentPair.includes(usedPair[0]) &&
+      currentPair.includes(usedPair[1])
+    ) {
+      pairIndex = pairs[i];
+    }
   }
+  ContractAssert(pairIndex !== undefined, "This pair does not exist yet");
+
+  let contractID = "",
+    contractInput,
+    transferTx;
+
+  // Grab the contract id of the token they are transferring in the supplied tx
+  try {
+    transferTx = await SmartWeave.unsafeClient.transactions.get(tokenTx);
+  } catch (err) {
+    throw new ContractError(err);
+  }
+
+  transferTx.get("tags").forEach((tag) => {
+    if (tag.get("name", { decode: true, string: true }) === "Contract") {
+      contractID = tag.get("value", { decode: true, string: true });
+    }
+    if (tag.get("name", { decode: true, string: true }) === "Input") {
+      contractID = tag.get("value", { decode: true, string: true });
+    }
+  });
+
+  ContractAssert(
+    typeof contractID === "string",
+    "Invalid contract ID: not a string"
+  );
+  ContractAssert(
+    contractID !== "",
+    "No contract ID found in the transfer transaction"
+  );
+  ContractAssert(
+    /[a-z0-9_-]{43}/i.test(contractID),
+    "Invalid contract ID format"
+  );
 
   // Test tokenTx for valid contract interaction
   const {
     validity: contractTxValidities,
-  } = await SmartWeave.contracts.readContractState(
-    "TOKEN CONTRACT ID",
-    undefined,
-    true
-  ); // TODO
+    // @ts-ignore
+  } = await SmartWeave.contracts.readContractState(contractID, undefined, true);
 
   // The transfer tx of the token somewhy does not exist
   ContractAssert(
@@ -55,8 +86,15 @@ export const createOrder = async (
     "The transfer transaction is an invalid interaction"
   );
 
+  let sortedOrderbook = state.pairs[pairIndex].orders.sort((a, b) =>
+    a.price > b.price ? 1 : -1
+  );
+
   // Check for limit order or market order
   if (price) {
+    // Check supplied price
+    ContractAssert(typeof price === "number", "Invalid price: not a number");
+
     // Limit order
   } else {
     // Market order
@@ -68,3 +106,27 @@ export const createOrder = async (
   });
   return { ...state };
 };
+
+function matchOrder(
+  token: string,
+  quantity: number, 
+  orderbook: [
+  {
+    transaction: string;
+    creator: string;
+    token: string;
+    price: number;
+  }?
+], 
+price?: number) {
+  if (price) {
+    // Limit order
+    // Compare quantity with first order in book
+    // Subtract order amount
+    // Add to outbox to transfer tokens
+
+  } else {
+    // Market order
+    
+  }
+}

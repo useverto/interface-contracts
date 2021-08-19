@@ -1,9 +1,5 @@
 import { ActionInterface, StateInterface, AddPairInterface } from "../faces";
 
-declare const ContractAssert: any;
-declare const SmartWeave: any;
-declare const ContractError: any;
-
 export const AddPair = async (
   state: StateInterface,
   action: ActionInterface
@@ -37,7 +33,7 @@ export const AddPair = async (
       );
       // Check each address in the balances object
       for (const addr in tokenState.balances) {
-        ContractAssert(typeof tokenState.balances[addr] === "number");
+        ContractAssert(typeof tokenState.balances[addr] === "number", `Invalid balance for "${addr}" in contract "${id}"`);
       }
     } catch (e) {
       throw new ContractError(e);
