@@ -4,8 +4,6 @@ import {
   StateInterface,
 } from "../faces";
 
-declare const ContractAssert: any;
-
 export const UpdateItems = (state: StateInterface, action: ActionInterface) => {
   const collaborators = state.collaborators;
 

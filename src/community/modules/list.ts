@@ -1,7 +1,5 @@
 import { ActionInterface, ListInterface, StateInterface } from "../faces";
 
-declare const ContractAssert: any;
-
 export const List = (state: StateInterface, action: ActionInterface) => {
   const people = state.people;
   const tokens = state.tokens;

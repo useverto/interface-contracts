@@ -4,9 +4,6 @@ import {
   StateInterface,
 } from "../faces";
 
-declare const ContractAssert: any;
-declare const SmartWeave: any;
-
 export const UpdateCollaborators = (
   state: StateInterface,
   action: ActionInterface
@@ -15,7 +12,7 @@ export const UpdateCollaborators = (
 
   const input: UpdateCollaboratorsInterface = action.input;
   const caller = action.caller;
-  const creator: string = SmartWeave.contract.owner;
+  const creator: string = SmartWeave.contract.owner; // TODO: fix this
 
   ContractAssert(
     collaborators.includes(caller),

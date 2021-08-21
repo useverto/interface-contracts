@@ -3,8 +3,6 @@ import { Transfer } from "./modules/transfer";
 import { Balance } from "./modules/balance";
 import { Mint } from "./modules/mint";
 
-declare const ContractError: any;
-
 export async function handle(state: StateInterface, action: ActionInterface) {
   switch (action.input.function) {
     case "transfer":

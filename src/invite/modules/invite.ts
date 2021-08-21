@@ -1,8 +1,5 @@
 import { ActionInterface, InviteInterface, StateInterface } from "../faces";
 
-declare const ContractAssert: any;
-declare const ContractError: any;
-
 export const Invite = (state: StateInterface, action: ActionInterface) => {
   const balances = state.balances;
   const invites = state.invites;

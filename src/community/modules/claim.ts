@@ -1,7 +1,5 @@
 import { ActionInterface, ClaimInterface, StateInterface } from "../faces";
 
-declare const ContractAssert: any;
-
 export const Claim = (state: StateInterface, action: ActionInterface) => {
   let people = state.people;
   const caller = action.caller;

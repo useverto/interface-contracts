@@ -1,8 +1,5 @@
 import { ActionInterface, MintInterface, StateInterface } from "../faces";
 
-declare const ContractAssert: any;
-declare const ContractError: any;
-
 export const Mint = (state: StateInterface, action: ActionInterface) => {
   const owner = state.owner;
   const allowMinting = state.allowMinting;
