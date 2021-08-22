@@ -12,7 +12,7 @@ export const UpdateCollaborators = (
 
   const input: UpdateCollaboratorsInterface = action.input;
   const caller = action.caller;
-  const creator: string = SmartWeave.contract.owner; // TODO: fix this
+  const creator: string = state.owner; // TODO: fix this
 
   ContractAssert(
     collaborators.includes(caller),

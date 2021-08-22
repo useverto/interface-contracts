@@ -1,6 +1,7 @@
 export interface StateInterface {
   name: string;
   description: string;
+  owner: string; // contract deployer
   collaborators: string[]; // addresses that can edit this collection
   items: string[]; // id of the tokens in the collection
 }
