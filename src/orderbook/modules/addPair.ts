@@ -33,7 +33,10 @@ export const AddPair = async (
       );
       // Check each address in the balances object
       for (const addr in tokenState.balances) {
-        ContractAssert(typeof tokenState.balances[addr] === "number", `Invalid balance for "${addr}" in contract "${id}"`);
+        ContractAssert(
+          typeof tokenState.balances[addr] === "number",
+          `Invalid balance for "${addr}" in contract "${id}"`
+        );
       }
     } catch (e) {
       throw new ContractError(e);

@@ -109,24 +109,23 @@ export const CreateOrder = async (
 
 function matchOrder(
   token: string,
-  quantity: number, 
+  quantity: number,
   orderbook: [
-  {
-    transaction: string;
-    creator: string;
-    token: string;
-    price: number;
-  }?
-], 
-price?: number) {
+    {
+      transaction: string;
+      creator: string;
+      token: string;
+      price: number;
+    }?
+  ],
+  price?: number
+) {
   if (price) {
     // Limit order
     // Compare quantity with first order in book
     // Subtract order amount
     // Add to outbox to transfer tokens
-
   } else {
     // Market order
-    
   }
 }
